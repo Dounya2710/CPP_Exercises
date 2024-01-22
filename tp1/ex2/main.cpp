@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include "Person.hpp"
 
 int main () {
@@ -13,35 +14,33 @@ int main () {
 
     std::cout << "La personne s'appelle " << person.getFirstName() << " " << person.getSurname() << std::endl;*/
 
-    std::cout << "Nombre de personnes: ";
-    int numberOfPeople;
-    std::cin >> numberOfPeople;
+    std::cout << "Nombre de personnes : ";
+    int numPeople;
+    std::cin >> numPeople;
 
-    Person* peopleArray = new Person[numberOfPeople];
+    std::vector<Person> peopleArray;
 
-    for (int i = 0; i < numberOfPeople; ++i)
+    for (int i = 0; i < numPeople; ++i)
     {
-        std::cout << "Prenom: ";
-        std::string firstName;
+        std::string firstName, surName;
+        std::cout << "Prenom : ";
         std::cin >> firstName;
-        peopleArray[i].setFirstName(firstName);
 
-        std::cout << "Nom: ";
-        std::string surName;
+        std::cout << "Nom : ";
         std::cin >> surName;
-        peopleArray[i].setSurname(surName);
+
+        peopleArray.push_back({firstName, surName});
     }
 
     std::cout << "Les personnes sont ";
-    for (int i = 0; i < numberOfPeople; ++i)
+    for (const auto& person : peopleArray)
     {
-        std::cout << peopleArray[i].getFirstName() << " " << peopleArray[i].getSurname();
-        if (i < numberOfPeople - 1)
+        std::cout << person.getFirstName() << " " << person.getSurname();
+
+        if (&person != &peopleArray.back())
             std::cout << ", ";
     }
     std::cout << "." << std::endl;
-
-    delete[] peopleArray;
 
     return 0;
 }
