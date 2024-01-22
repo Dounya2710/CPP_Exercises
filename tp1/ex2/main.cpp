@@ -45,3 +45,10 @@ int main () {
 
     return 0;
 }
+
+/* Compilation avec:
+g++ -c Person.cpp
+g++ main.cpp Person.o -o person
+
+Exécution avec ./person
+*/
