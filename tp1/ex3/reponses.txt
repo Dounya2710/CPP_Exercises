@@ -1,0 +1,60 @@
+1) Discussion effectuée en TP
+2) La phase de build, également connue sous 
+le nom de compilation, est le processus par lequel 
+le code source d'un programme est traduit en code machine ou en langage intermédiaire. 
+Cette phase est généralement effectuée par le compilateur du langage de programmation utilisé. 
+La compilation convertit le code source écrit par le programmeur en un format compréhensible par 
+la machine cible ou par une machine virtuelle.Pendant la compilation, le compilateur vérifie la syntaxe 
+du code source, effectue des optimisations, génère des fichiers intermédiaires, et produit des fichiers 
+exécutables ou des bibliothèques, selon le type de programme à construire.
+
+La phase de link, ou édition des liens, est la phase du processus de construction où les différents fichiers 
+objets générés lors de la compilation sont combinés pour former un exécutable final ou une bibliothèque. Cette phase est réalisée par le linker.
+Le linker résout les références entre différentes parties du programme en connectant les fonctions et les variables déclarées dans un fichier 
+objet avec leurs définitions dans d'autres fichiers objets. Il peut également inclure des bibliothèques externes nécessaires au programme.
+En résumé, la compilation transforme le code source en fichiers objets, et l'édition des liens rassemble ces fichiers objets pour créer 
+l'exécutable final.
+
+La précompilation est une étape optionnelle qui intervient avant la compilation. Elle implique la génération d'un code intermédiaire ou 
+d'un fichier précompilé qui peut être réutilisé pour accélérer les temps de compilation ultérieurs. Cela peut inclure la substitution 
+de macros, l'importation de fichiers d'en-tête, et d'autres transformations du code source.
+La précompilation permet de réduire le temps de compilation en évitant de retraiter les mêmes fichiers source à chaque compilation. 
+Elle est souvent utilisée pour accélérer le développement en économisant du temps lors de l'édition du code.
+
+3) a. error: 'qqchose' was not declared in this scope : Cela signifie que le compilateur ne peut pas trouver une déclaration 
+pour la variable, fonction ou autre élément nommé 'qqchose' dans le contexte actuel du code. Il peut s'agir d'une variable qui 
+n'a pas été déclarée, ou dont la déclaration n'est pas visible à cet endroit précis du code.
+
+b. error: 'qqchose' is not a member of 'std' : Cela indique que le compilateur ne peut pas trouver le symbole 'qqchose' dans 
+l'espace de noms (namespace) 'std'. Cela se produit généralement lorsqu'on essaie d'utiliser une fonction ou une classe qui 
+appartient à la bibliothèque standard C++ (std) sans inclure l'en-tête approprié. Ces erreurs se produisent généralement pendant 
+la phase de compilation (phase de build).
+
+L'instruction préprocesseur #include est utilisée pour inclure le contenu d'un fichier d'en-tête dans le code source. 
+Les fichiers d'en-tête contiennent des déclarations de fonctions, des définitions de classes et d'autres éléments qui peuvent 
+être nécessaires dans votre programme. En incluant ces fichiers d'en-tête, vous fournissez au compilateur les informations nécessaires 
+pour résoudre les déclarations et les références aux symboles utilisés dans votre code.
+
+4) Le programme affiche l'erreur suivante:
+/usr/bin/ld : /tmp/ccTAIF2C.o : dans la fonction « main » :
+main.cpp:(.text+0x5) : référence indéfinie vers « print_hello() »
+collect2: error: ld returned 1 exit status
+
+Elle est différente car elle ne fait pas partie des erreurs fréquemment rencontré, elle est due à une fonction non déclarée.
+
+5) A présent, nous avons les erreurs suivantes:
+$ g++ main.cpp utils.cpp -o hello
+/usr/bin/ld : /tmp/cccomDmb.o : dans la fonction « print_bye() » :
+utils.cpp:(.text+0x0) : définitions multiples de « print_bye() »; /tmp/ccy0ljVb.o:main.cpp:(.text+0x0) : défini pour la première fois ici
+collect2: error: ld returned 1 exit status
+
+Il s'agit d'une erreur inclus lors de la phase de link car il trouve deux fois la déclaration de print_bye() dans utils.hpp et dans main.cpp. 
+Une solution possible serait de définir la fonction print_bye() dans le fichier utils.cpp.
+
+6) Avec l'utilisation de inline, la compilation se passe bien et  le programme affiche bien:
+Hello
+Bye
+
+On peut en déduire que inline permet d'indiquer au linker que des copies de la fonction peuvent être présentes dans plusieurs unités de 
+compilation, et cela doit être pris en compte pour éviter les erreurs de lien. Il s'agit essentiellement d'une directive au compilateur 
+pour permettre l'inlining et éviter les erreurs de "multiple definition" lors de la liaison.
