@@ -16,6 +16,9 @@ public:
     Player(const std::string& name);
     static void deal_all_cards(Player& p1, Player& p2);
     const Card& operator[](size_t index) const;
+    static int turn_number;
+    static bool play(Player& p1, Player& p2);
+    unsigned int getScore() const;
 };
 
 #endif 

@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <random>
 
+int Player::turn_number = 0;
+
 Player::Player(const std::string& name) : _name(name) {}
 
 void Player::deal_all_cards(Player& p1, Player& p2) {
@@ -26,4 +28,35 @@ const Card& Player::operator[](size_t index) const {
     } else {
         throw std::out_of_range("Index out of bounds");
     }
+}
+
+bool Player::play(Player& p1, Player& p2) {
+    if (turn_number >= p1._cards.size() || turn_number >= p2._cards.size()) {
+        return true;
+    }
+
+    // Display the cards played in the current turn
+    std::cout << p1._name << " plays: ";
+    p1[turn_number].print();
+    std::cout << " | " << p2._name << " plays: ";
+    p2[turn_number].print();
+    std::cout << std::endl;
+
+    if (p1[turn_number] == p2[turn_number]) {
+        
+    } else if (p1[turn_number] < p2[turn_number]) {
+        p2._score++;
+    } else {
+        p1._score++;
+    }
+
+    // Increment the turn number
+    turn_number++;
+
+    // Check if the game is over
+    return (turn_number >= p1._cards.size() || turn_number >= p2._cards.size());
+}
+
+unsigned int Player::getScore() const {
+    return _score;
 }

@@ -24,12 +24,10 @@ int main() {
     Player p2 { "Julien" };
     Player::deal_all_cards(p1, p2);
 
-    for (auto i = 0; i < 16; ++i) {
-        p1[i].print();
-        std::cout << std::endl;
-        p2[i].print();
-        std::cout << std::endl;
-    }
+    while (!Player::play(p1, p2)) {}
+
+    std::cout << "Game Over!" << std::endl;
+    std::cout << p1.getScore() << " - " << p2.getScore() << std::endl;
 
     return 0;
 }
