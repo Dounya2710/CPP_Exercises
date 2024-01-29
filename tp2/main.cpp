@@ -2,7 +2,7 @@
 
 int main() {
     // Test print
-    Card c1 { 8, "Pique" };
+    const Card c1 { 8, "Pique" };
     std::cout << c1 << std::endl; // Should print "8 de Pique"
 
     // Test const print
@@ -10,7 +10,7 @@ int main() {
     std::cout << c2 << std::endl; // Should print "8 de Carreau"
 
     // Test equality operator
-    Card c3 { 10, "Carreau" };
+    const Card c3 { 10, "Carreau" };
     std::cout << (c2 == c1) << std::endl; // Should print 1
     std::cout << (c2 == c3) << std::endl; // Should print 0
 
