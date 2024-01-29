@@ -1,4 +1,5 @@
 #include "Card.hpp"
+#include "Player.hpp"
 
 int main() {
     // Test print
@@ -18,6 +19,17 @@ int main() {
     std::cout << (c1 < c2) << std::endl; // Should print 0
     std::cout << (c1 < c3) << std::endl; // Should print 1
     std::cout << (c3 < c1) << std::endl; // Should print 0
+
+    Player p1 { "Gerald" };
+    Player p2 { "Julien" };
+    Player::deal_all_cards(p1, p2);
+
+    for (auto i = 0; i < 16; ++i) {
+        std::cout << p1[i] << std::endl;
+        std::cout << std::endl;
+        std::cout << p2[i] << std::endl;
+        std::cout << std::endl;
+    }
 
     return 0;
 }
