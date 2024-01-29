@@ -7,9 +7,9 @@ Player::Player(const std::string& name) : _name(name) {}
 void Player::deal_all_cards(Player& p1, Player& p2) {
     std::vector<Card> all_cards;
 
-    for (int value = 1; value <= 13; ++value) {
+    for (int value = 0; value < 13; ++value) {
         for (int color = 0; color < 4; ++color) {
-            all_cards.emplace_back(value, color);
+            all_cards.emplace_back(static_cast<CardValue>(value), static_cast<CardColor>(color));
         }
     }
 

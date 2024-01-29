@@ -1,18 +1,23 @@
 #include "Card.hpp"
 
-Card::Card(int value, const std::string& color) : _value(value >= 0 ? value : 0), _color(color) {}
+Card::Card(CardValue value, CardColor color) : _value(value), _color(color) {}
 
 bool Card::operator==(const Card& other) const {
     return _value == other._value;
 }
 
 bool Card::operator<(const Card& other) const {
-    return _value < other._value;
+    return static_cast<int>(_value) < static_cast<int>(other._value);
 }
 
 std::ostream& operator<<(std::ostream& os, const Card& card) {
-    const char* values[] = {"As", nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, "Valet", "Dame", "Roi"};
-    
-    os << (values[card._value] ? values[card._value] : std::to_string(card._value)) << " de " << card._color;
+    const char* values[] = {"As", "Deux", "Trois", "Quatre", "Cinq", "Six", "Sept", "Huit", "Neuf", "Dix", "Valet", "Dame", "Roi"};
+    const char* colors[] = {"Pique", "Coeur", "Carreau", "Trefle"};
+
+    os << values[static_cast<int>(card._value)] << " de " << colors[static_cast<int>(card._color)];
     return os;
+}
+
+void Card::print() const {
+    std::cout << *this;
 }

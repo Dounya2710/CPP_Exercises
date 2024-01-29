@@ -4,16 +4,20 @@
 #include <iostream>
 #include <string>
 
+enum class CardValue { As, Deux, Trois, Quatre, Cinq, Six, Sept, Huit, Neuf, Dix, Valet, Dame, Roi };
+enum class CardColor { Pique, Coeur, Carreau, Trefle };
+
 class Card {
 private:
-    int _value;
-    std::string _color;
+    CardValue _value;
+    CardColor _color;
 
 public:
-    Card(int value, const std::string& color);
+    Card(CardValue value, CardColor color);
     bool operator==(const Card& other) const;
     bool operator<(const Card& other) const;
     friend std::ostream& operator<<(std::ostream& os, const Card& card);
+    void print() const;
 };
 
 #endif
