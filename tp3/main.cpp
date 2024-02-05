@@ -5,7 +5,7 @@ int add(int a, int b)
     return a + b;
 }
 
-int add_to(int a, int b)
+void add_to(int &a, int b)
 {
     a += b;
 }
