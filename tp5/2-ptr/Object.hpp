@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <cstddef>
 
 class Object
 {
@@ -47,3 +48,4 @@ private:
     int    _value = 0;
     bool   _empty = false;
 };
+
