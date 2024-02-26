@@ -8,3 +8,5 @@ if(EXISTS ${tp_folder}/CMakeLists.txt)
     add_subdirectory(${tp_folder})
 endif()
 
+endforeach()
+
