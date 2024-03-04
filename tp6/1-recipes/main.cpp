@@ -238,4 +238,6 @@ int main()
             print_usage();
         }
     }
+
+    return 0;
 }

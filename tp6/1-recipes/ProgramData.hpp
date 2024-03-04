@@ -4,6 +4,8 @@
 #include "Recipe.hpp"
 
 #include <string>
+#include <memory>
+#include <cstddef>
 #include <vector>
 
 // Contient le résultat de la production d'une recette.
@@ -37,4 +39,6 @@ public:
 
 private:
     // Placez vos données ici...
+    std::vector<std::unique_ptr<Material>> _materials;
+    std::vector<Recipe> _recipes;
 };
