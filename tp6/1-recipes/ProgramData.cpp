@@ -73,12 +73,12 @@ ProductionResult ProgramData::produce(size_t recipe_id)
     for (const auto& materialName : recipe.getMaterials())
     {
         bool materialFound = false;
-        for (auto& material : _materials)
+        for (auto it = _materials.begin(); it != _materials.end(); ++it)
         {
-            if (material->getName() == materialName)
+            if ((*it)->getName() == materialName)
             {
                 materialFound = true;
-                material.reset();
+                _materials.erase(it);
                 break;
             }
         }
