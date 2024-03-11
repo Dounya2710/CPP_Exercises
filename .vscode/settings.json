@@ -83,9 +83,17 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "variant": "cpp",
+<<<<<<< HEAD
         "codecvt": "cpp",
         "ranges": "cpp",
         "__nullptr": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
+=======
+        "forward_list": "cpp",
+        "locale": "cpp",
+        "xlocbuf": "cpp",
+        "xlocmes": "cpp"
+    }
+>>>>>>> upstream/master
 }
