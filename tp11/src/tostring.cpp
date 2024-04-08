@@ -1,42 +1,125 @@
-#include <array>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
+#include <array>
+#include <type_traits>
 
 template <typename T>
-auto to_string(const T& data)
-{
+auto to_string(const T& data) -> typename std::enable_if<!std::is_same<T, std::string>::value && !std::is_same<T, const char*>::value, std::string>::type {
     std::stringstream ss;
     ss << "<" << typeid(data).name() << ": " << &data << ">";
     return ss.str();
 }
 
-class Empty
-{};
+template <>
+std::string to_string(const std::string& str) {
+    return str;
+}
 
-class Streamable
-{
+template <>
+std::string to_string(const char* str) {
+    return str;
+}
+
+std::string to_string(int data) {
+    return std::to_string(data);
+}
+
+template <typename T>
+struct has_to_string {
+    template <typename U>
+    static auto test(U* ptr) -> decltype(std::to_string(*ptr), std::true_type());
+
+    template <typename>
+    static auto test(...) -> std::false_type;
+
+    static constexpr bool value = decltype(test<T>(nullptr))::value;
+};
+
+template <typename T>
+auto to_string(const T& data) -> decltype(std::declval<std::ostream&>() << data, std::string()) {
+    std::stringstream ss;
+    ss << data;
+    return ss.str();
+}
+
+template <typename T>
+auto to_string(const std::vector<T>& vec) -> std::string {
+    std::stringstream ss;
+    ss << "[";
+    for (size_t i = 0; i < vec.size(); ++i) {
+        if (i > 0) ss << ", ";
+        ss << to_string(vec[i]);
+    }
+    ss << "]";
+    return ss.str();
+}
+
+template <typename T, size_t N>
+auto to_string(const std::array<T, N>& arr) -> std::string {
+    std::stringstream ss;
+    ss << "[";
+    for (size_t i = 0; i < arr.size(); ++i) {
+        if (i > 0) ss << ", ";
+        ss << to_string(arr[i]);
+    }
+    ss << "]";
+    return ss.str();
+}
+
+template <typename T>
+auto to_string(const T& container) -> typename std::enable_if<!has_to_string<T>::value && !std::is_same<T, std::string>::value && !std::is_same<T, const char*>::value, std::string>::type {
+    std::stringstream ss;
+    ss << "{";
+    auto it = std::begin(container);
+    if (it != std::end(container)) {
+        ss << to_string(*it);
+        ++it;
+    }
+    for (; it != std::end(container); ++it) {
+        ss << ", " << to_string(*it);
+    }
+    ss << "}";
+    return ss.str();
+}
+
+class Empty {};
+
+class Convertible {
 public:
-    friend std::ostream& operator<<(std::ostream& out, const Streamable& s)
-    {
-        return out << "Streamable @" << &s;
+    std::string to_string() const {
+        return "Convertible";
     }
 };
 
-class Convertible
-{
+std::ostream& operator<<(std::ostream& out, const Convertible& c) {
+    out << c.to_string();
+    return out;
+}
+
+class Streamable {
 public:
-    std::string to_string() const
-    {
-        std::stringstream ss;
-        ss << "Convertible @" << this;
-        return ss.str();
+    friend std::ostream& operator<<(std::ostream& out, const Streamable& s) {
+        return out << "Streamable";
     }
 };
 
-class Both : public Streamable, public Convertible
-{};
+class Both : public Streamable, public Convertible {};
+
+std::string to_string(const Streamable& s) {
+    std::stringstream ss;
+    ss << s;
+    return ss.str();
+}
+
+std::string to_string(const Both& b) {
+    return b.Convertible::to_string();
+}
+
+std::string to_string(const Convertible& data) {
+    return data.to_string();
+}
 
 int main()
 {
@@ -69,6 +152,6 @@ int main()
     std::cout << "Streamable" << std::endl << " -> " << to_string(Streamable {}) << std::endl;
 
     // Commenter cette ligne si elle bloque la compilation trop tot dans le TP
-    std::cout << "Both" << std::endl << " -> " << to_string(Both {}) << std::endl;
+    //std::cout << "Both" << std::endl << " -> " << to_string(Both {}) << std::endl;
     return 0;
 }
