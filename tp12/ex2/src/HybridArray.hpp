@@ -1,49 +1,67 @@
 #include <algorithm>
 #include <iostream>
+#include <stdexcept>
+#include <array>
+#include <functional>
+#include <utility>
+#include <string>
+#include <vector>
+#include <memory>
 
-template <typename Container, size_t Size>
+template <typename TValue, size_t TStaticSize>
 class HybridArray
 {
-    public:
-        HybridArray() = default;
+public:
+    template <typename... TArgs, std::enable_if_t<(sizeof...(TArgs) <= TStaticSize), int> = 0>
+    HybridArray(TArgs&&... args)
+        : _static_values { std::forward<TArgs>(args)... }
+        , _static_count { sizeof...(TArgs) }
+    {}
 
-        static constexpr size_t static_size() { return Size; }
+    template <typename... TArgs, std::enable_if_t<(sizeof...(TArgs) > TStaticSize), int> = 0>
+    HybridArray(TArgs&&... args)
+        : _dynamic_values { std::forward<TArgs>(args)... }
+        , _static_count { TStaticSize }
+    {}
 
-        /*void push_back(const Container& value) {
-            if (size_ < Size) {
-                data_[size_] = value;
-                ++size_;
-            }
-        }*/
+    constexpr static size_t static_size() { return TStaticSize; }
 
-        const Container& push_back(const Container& value) {
-            if (size_ < Size) {
-                data_[size_] = value;
-                ++size_;
-                return data_[size_ - 1];
-            } else {
-                throw std::out_of_range("HybridArray is full");
-            }
+    size_t size() const { return _dynamic_values.empty() ? _static_count : _dynamic_values.size(); }
+
+    TValue& push_back(const TValue& value)
+    {
+        if (_static_count < TStaticSize)
+        {
+            return _static_values[_static_count++] = value;
         }
-
-        size_t size() const {return size_;}
-
-        Container& operator[](size_t index) {
-            if (index >= size_) {
-                throw std::out_of_range("Index out of range");
+        else
+        {
+            if (_static_count == TStaticSize && _dynamic_values.empty())
+            {
+                std::move(_static_values.begin(), _static_values.end(), std::back_inserter(_dynamic_values));
             }
-            return data_[index];
-        }
 
-        const Container& operator[](size_t index) const {
-            if (index >= size_) {
-                throw std::out_of_range("Index out of range");
-            }
-            return data_[index];
+            _dynamic_values.push_back(value);
+            return _dynamic_values.back();
         }
-    
-    private:
-        Container data_[Size];
-        size_t size_ = 0;
+    }
 
+    const TValue& operator[](size_t index) const
+    {
+        return _dynamic_values.empty() ? _static_values[index] : _dynamic_values[index];
+    }
+
+    TValue& operator[](size_t index) { return const_cast<TValue&>(std::as_const(*this)[index]); }
+
+private:
+    std::array<TValue, TStaticSize> _static_values {};
+    size_t                          _static_count = 0u;
+
+    std::vector<TValue> _dynamic_values;
+};
+
+template <typename TValue>
+class HybridArray<TValue, 0u> : public std::vector<TValue>
+{
+    using std::vector<TValue>::vector;
 };
