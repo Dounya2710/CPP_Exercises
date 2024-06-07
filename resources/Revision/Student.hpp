@@ -5,7 +5,7 @@
 class Student : public Person {
     public:
         Student(const std::string& name, int age, float avg)
-            : Person(name_, age_)
+            : Person(name, age)
             , avg_ {avg}
         {}
 
@@ -15,7 +15,5 @@ class Student : public Person {
         }
 
     private:
-        std::string name_;
-        int age_;
         float avg_;
 };

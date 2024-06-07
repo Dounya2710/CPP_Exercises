@@ -8,7 +8,7 @@ class Person {
         Person() {}
 
         Person(const std::string& name, int age)
-            : name_ {std::move(name)}
+            : name_ {name}
             , age_ {age}
         {}
 
@@ -25,7 +25,7 @@ class Person {
         }
 
         ~Person() {
-            std::cout << name_ << " died at " << std::to_string(age_) << " years old. RIP" << std::endl;
+            //std::cout << name_ << " died at " << std::to_string(age_) << " years old. RIP" << std::endl;
         }
     
     private:
