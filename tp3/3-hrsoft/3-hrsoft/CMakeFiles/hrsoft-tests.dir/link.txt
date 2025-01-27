@@ -1,0 +1,1 @@
+/usr/bin/c++ "CMakeFiles/hrsoft-tests.dir/HRSoftTests.cpp.o" -o hrsoft-tests 

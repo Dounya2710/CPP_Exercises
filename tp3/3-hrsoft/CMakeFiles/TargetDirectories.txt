@@ -1,0 +1,6 @@
+/home/2inf1/dounya.hamma/Documents/CPP_Exercises/tp3/3-hrsoft/CMakeFiles/edit_cache.dir
+/home/2inf1/dounya.hamma/Documents/CPP_Exercises/tp3/3-hrsoft/CMakeFiles/rebuild_cache.dir
+/home/2inf1/dounya.hamma/Documents/CPP_Exercises/tp3/3-hrsoft/3-hrsoft/CMakeFiles/hrsoft-tests.dir
+/home/2inf1/dounya.hamma/Documents/CPP_Exercises/tp3/3-hrsoft/3-hrsoft/CMakeFiles/hrsoft.dir
+/home/2inf1/dounya.hamma/Documents/CPP_Exercises/tp3/3-hrsoft/3-hrsoft/CMakeFiles/edit_cache.dir
+/home/2inf1/dounya.hamma/Documents/CPP_Exercises/tp3/3-hrsoft/3-hrsoft/CMakeFiles/rebuild_cache.dir

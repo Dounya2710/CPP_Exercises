@@ -94,5 +94,6 @@
         "cfenv": "cpp",
         "typeindex": "cpp",
         "__nullptr": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

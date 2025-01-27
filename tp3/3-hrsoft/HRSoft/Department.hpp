@@ -4,6 +4,7 @@
 
 #include <list>
 #include <string>
+#include <iostream>
 
 class Department
 {
@@ -23,6 +24,21 @@ public:
 
         return employee;
     }
+
+    void print_employees() const {
+        for(const auto& e: _employees) {
+            std::cout << e << std::endl;
+        }
+    }
+
+    std::list<Employee> get_employee() const {
+        return _employees;
+    }
+
+    std::string getName() const {
+        return _name;
+    }
+
 
 private:
     std::string _name;
