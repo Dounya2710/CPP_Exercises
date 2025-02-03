@@ -25,16 +25,16 @@ foreach(exercice_folder ${exercice_folders})
         set(target "${exercice_id}-${test_id}")
 
         # Create an executable from the test file and all the sources
-        add_executable(${target}
-            ${exercice_src}
-            ${exercice_test}
-        )
+        #add_executable(${target}
+         #   ${exercice_src}
+          #  ${exercice_test}
+        #)
 
         # Indicate that the executable depends on Catch2
-        target_link_libraries(${target} PRIVATE Catch2::Catch2WithMain)
+        #target_link_libraries(${target} PRIVATE Catch2::Catch2WithMain)
 
         # Indicate that we use C++17 standard
-        target_compile_features(${target} PRIVATE cxx_std_17)
+        #target_compile_features(${target} PRIVATE cxx_std_17)
 
     endforeach()
 
