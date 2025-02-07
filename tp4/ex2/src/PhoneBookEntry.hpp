@@ -10,11 +10,11 @@ class PhoneBookEntry{
             , _pn {pn}
         {}
 
-        std::string& get_name() const {
+        const std::string& get_name() const {
             return _name;
         }
 
-        PhoneNumber& get_number() const {
+        const PhoneNumber& get_number() const {
             return _pn;
         }
 
@@ -23,6 +23,6 @@ class PhoneBookEntry{
         }
 
     private:
-        std::string& _name;
-        PhoneNumber& _pn;
+        std::string _name;
+        PhoneNumber _pn;
 };
