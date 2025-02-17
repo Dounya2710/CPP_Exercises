@@ -1,0 +1,27 @@
+# Hashes of file build rules.
+69d967cfe806f94fd1861971283221f9 tp4/CMakeFiles/run-all-tests
+8b7debc22d3fef4f8af2fd736563cd9a tp4/CMakeFiles/run-ex1-qcm
+750cb443a709bec6b41c0e751f9b132c tp4/CMakeFiles/run-ex2-01-phone-number
+008b7c2fce7b68d8dcfdd2bff3575564 tp4/CMakeFiles/run-ex2-02-is-valid
+ad1a6bb0d4a6ec8e91142fec24f7ca88 tp4/CMakeFiles/run-ex2-03-const-is-valid
+e002b4a2f02ab638b1fe998acfdb8b0e tp4/CMakeFiles/run-ex2-04-index
+359aa8ceebf374f0f5a481bf71074bbb tp4/CMakeFiles/run-ex2-05-index-out
+82dea393ab589ab4024065a86f6c6b64 tp4/CMakeFiles/run-ex2-06-const-index
+0ce766139aabac539d91f1ff81f190c0 tp4/CMakeFiles/run-ex2-07-multi-inclusions
+0ddfe3b33a86371cf0fd65bc4013fb24 tp4/CMakeFiles/run-ex2-11-print-out
+70343e9f9f928147f3b1417191bc3785 tp4/CMakeFiles/run-ex2-12-print-any-stream
+cf3892ddeb0cd9e1bc3409252463e2e1 tp4/CMakeFiles/run-ex2-13-print-concat
+98112f994e7ea61127492623797d2f9b tp4/CMakeFiles/run-ex2-21-phone-book-entry
+a75a07a1b492c130a2e32033fa0dd2a6 tp4/CMakeFiles/run-ex2-22-accessors
+b78572b476703ee837645b57d38f4bb6 tp4/CMakeFiles/run-ex2-23-return-refs
+20fa124413e08a06704434bede570848 tp4/CMakeFiles/run-ex2-24-const-accessors
+c241c46d8744744b194e7f69b6d6122e tp4/CMakeFiles/run-ex2-25-equality
+35e035cf7d62dd324f1e293773a38b92 tp4/CMakeFiles/run-ex2-26-const-equality
+d4be002b253973bb1a3fbef4c4c5998e tp4/CMakeFiles/run-ex2-31-phone-book
+58862d03ee4e9fc57576a9344a9751c7 tp4/CMakeFiles/run-ex2-32-add-entry
+d1548fa4605ef1c40332d9866662def9 tp4/CMakeFiles/run-ex2-33-get-entry
+a7c243d7a7026d0f86d6450f246158e6 tp4/CMakeFiles/run-ex2-34-valid-entry
+1810735541506467b3038f72588dd404 tp4/CMakeFiles/run-ex2-35-unique-entry
+f49b94d0ac9e4632d1f8959ea690aa2f tp4/CMakeFiles/run-ex2-36-no-desinstanciation
+7c9e8d3c830252f8c58921d1a6c5c8d4 tp4/CMakeFiles/run-ex3-01-types
+5bbf64afca5710e0aa68619b729b6139 tp4/CMakeFiles/run-ex3-02-vector
