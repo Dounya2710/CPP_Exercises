@@ -31,7 +31,7 @@ class Recipe
     }
 
     public:
-        Recipe(size_t id, const std::vector<std::string>& materials, const std::vector<std::string>& products)
+        Recipe(size_t id, std::vector<std::string> materials, std::vector<std::string> products)
             : _id {id}
             , _materials {std::move(materials)}
             , _products {std::move(products)}
