@@ -34,5 +34,3 @@ class Base {
     protected:
         virtual bool is_same_type(const Base& other) const = 0;
 };
-
-#define JAI_LU_LE_WARNING_09 true

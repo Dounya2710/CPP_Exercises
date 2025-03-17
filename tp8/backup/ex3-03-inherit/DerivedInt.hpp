@@ -5,7 +5,8 @@
 class DerivedInt: public Base {
     public:
         DerivedInt(int value)
-            : _value {value}
+            : Base("Int")
+            , _value {value}
         {}
 
         bool is_null() const override {
@@ -14,6 +15,10 @@ class DerivedInt: public Base {
 
         int data() const {
             return _value;
+        }
+
+        std::string to_string() const override {
+            return std::to_string(_value);
         }
 
     private:

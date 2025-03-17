@@ -9,6 +9,17 @@ class Base {
     }
 
     public:
+        Base(std::string type)
+            : _type {std::move(type)}
+        {}
+
         virtual bool is_null() const = 0;
         virtual std::string to_string() const = 0;
+
+        const std::string& type() const {
+            return _type;
+        }
+
+    private:
+        std::string _type;
 };

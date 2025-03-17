@@ -5,7 +5,8 @@
 class DerivedInt: public Base {
     public:
         DerivedInt(int value)
-            : _value {value}
+            : Base("Int")
+            , _value {value}
         {}
 
         bool is_null() const override {

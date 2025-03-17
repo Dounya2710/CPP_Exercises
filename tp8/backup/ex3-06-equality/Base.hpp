@@ -15,7 +15,6 @@ class Base {
 
         virtual bool is_null() const = 0;
         virtual std::string to_string() const = 0;
-        virtual ~Base() = default;
 
         const std::string& type() const {
             return _type;
@@ -34,5 +33,3 @@ class Base {
     protected:
         virtual bool is_same_type(const Base& other) const = 0;
 };
-
-#define JAI_LU_LE_WARNING_09 true

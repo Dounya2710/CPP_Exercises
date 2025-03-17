@@ -5,7 +5,8 @@
 class DerivedString: public Base {
     public:
         DerivedString(const std::string& str)
-            : _str {str}
+            : Base("String")
+            , _str {str}
         {}
 
         bool is_null() const override {
@@ -13,6 +14,10 @@ class DerivedString: public Base {
         }
 
         const std::string& data() const {
+            return _str;
+        }
+
+        std::string to_string() const override {
             return _str;
         }
 
