@@ -21,6 +21,14 @@ class DerivedInt: public Base {
             return std::to_string(_value);
         }
 
+        std::unique_ptr<Base> new_copy() const override {
+            return std::make_unique<DerivedInt>(*this);
+        }
+
+        std::unique_ptr<Base> new_move() override {
+            return std::make_unique<DerivedInt>(std::move(*this));
+        }
+
     protected:
         virtual bool is_same_type(const Base& base) const override {
             return (dynamic_cast<const DerivedInt&>(base)._value == _value);

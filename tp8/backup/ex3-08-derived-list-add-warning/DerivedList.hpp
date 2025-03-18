@@ -13,6 +13,16 @@ class DerivedList: public Base {
             : Base("List")
         {}
 
+        DerivedList(const DerivedList& other)
+            : DerivedList()
+        {
+            for(const auto& e: other._l) {
+                add(*e);
+            }
+        }
+
+        DerivedList(DerivedList&&) = default;
+
         bool is_null() const override {
             return _l.empty();
         }
@@ -23,15 +33,27 @@ class DerivedList: public Base {
             for (unsigned i = 0; i < _l.size(); ++i) {
                 res << _l[i]->to_string();
                 if (i < _l.size() - 1) {
-                    res << ", ";
+                    res << ",";
                 }
             }
             res << "]";
             return res.str();
         }
 
+        std::unique_ptr<Base> new_copy() const override {
+            return std::make_unique<DerivedList>(*this);
+        }
+
         void add(const Base& element) {
-            _l.push_back(element);
+            _l.push_back(element.new_copy());
+        }
+
+        std::unique_ptr<Base> new_move() override {
+            return std::make_unique<DerivedList>(std::move(*this));
+        }
+
+        void add(Base&& element) {
+            _l.push_back(element.new_move());
         }
 
     protected:

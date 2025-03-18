@@ -6,8 +6,8 @@
 
 class StringInstancePair{
     public:
-        StringInstancePair(const std::string& str)
-            : _str {str}
+        StringInstancePair(std::string str)
+            : _str {std::move(str)}
             , _trackers {std::make_unique<Tracker>()}
         {}
 

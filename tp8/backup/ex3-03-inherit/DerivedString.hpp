@@ -21,6 +21,19 @@ class DerivedString: public Base {
             return _str;
         }
 
+        std::unique_ptr<Base> new_copy() const override {
+            return std::make_unique<DerivedString>(*this);
+        }
+
+        std::unique_ptr<Base> new_move() override {
+            return std::make_unique<DerivedString>(std::move(*this));
+        }
+
+    protected:
+        virtual bool is_same_type(const Base& base) const override {
+            return (dynamic_cast<const DerivedString&>(base)._str == _str);
+        }
+
     private:
         std::string _str;
 };

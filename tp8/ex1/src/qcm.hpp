@@ -74,7 +74,7 @@ private:
 };
 #endif
 // Est-ce que l'implémentation 1 est meilleure que l'implémentation 2?
-#define ANSWER_2 true
+#define ANSWER_2 false
 
 // 3. // ====================================================================================================
 #ifdef CODE_IGNORE_PAR_LE_COMPILATEUR
@@ -120,7 +120,7 @@ private:
 #endif
 // Est-ce que l'utilisation de la classe ci-dessus est susceptible de créer des problèmes de mémoire (fuite,
 // double-déallocation, etc.) ?
-#define ANSWER_4 true
+#define ANSWER_4 false
 
 // 5. // ====================================================================================================
 #ifdef CODE_IGNORE_PAR_LE_COMPILATEUR
