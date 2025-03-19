@@ -5,10 +5,10 @@
 #include <vector>   // vector
 #include <utility> // std::move
 
-Card::Card(unsigned v, const std::string& c)
+Card::Card(unsigned v, std::string c)
 {
     _value = v;
-    _color = c;
+    _color = std::move(c);
 }
 
 void Card::print() const

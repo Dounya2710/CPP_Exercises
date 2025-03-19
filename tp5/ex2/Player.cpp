@@ -7,9 +7,9 @@
 #include <thread> // this_thread
 #include <utility> // std::move
 
-Player::Player(const std::string& nom)
+Player::Player(std::string name)
 {
-    _name = name;
+    _name = std::move(name);
 }
 
 

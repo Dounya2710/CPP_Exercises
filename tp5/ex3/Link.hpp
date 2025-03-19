@@ -8,10 +8,11 @@ class Link
 {
 public:
     // Il faut réflechir aux prototypes des fonctions-membres ci-dessous, certains ne sont pas corrects.
-    Link(const Person&);
-    // Person value();
-    // Link(Link*, Person);
-    Link(const Link*, const Person&, const Link*);
+    Link(Person);
+    const Person& value() const;
+    Person& value();
+    Link(Link*, Person);
+    Link(Link*, Person, Link*);
     
 
 private:

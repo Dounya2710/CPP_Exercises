@@ -10,13 +10,13 @@ private:
     std::vector<Card> _cards;
 
 public:
-    Player(const std::string&);
+    Player(std::string);
 
     Card pop_back();
     void push_front(Card);
 
     const std::vector<Card>& cards() { return _cards; }
-    std::string       name() { return _name; }
+    const std::string&       name() { return _name; }
 
     static void deal_all_cards(Player&, Player&);
     static bool play(Player&, Player&, std::vector<Card> stake = {});

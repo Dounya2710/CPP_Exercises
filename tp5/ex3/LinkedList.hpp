@@ -7,11 +7,11 @@ class LinkedList
 {
 public:
     // Il faut réflechir aux prototypes des fonctions-membres ci-dessous, certains ne sont pas corrects.
-    // friend std::ostream& operator<<(std::ostream& o, LinkedList list);
+    friend std::ostream& operator<<(std::ostream& o, LinkedList list);
 
-    // size_t size();
-    // bool   empty();
-    // void   push_back(Person);
+    size_t size();
+    bool   empty();
+    void   push_back(Person);
     // Person back();
     // Person front();
 

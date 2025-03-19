@@ -15,7 +15,7 @@ public:
     // CONSTRUCTEURS DE COPIE ET DE DEPLACEMENT.
     // ==========================================
 
-    Card(unsigned, const std::string&);
+    Card(unsigned, std::string);
 
     void print() const;
     bool operator==(const Card&) const;
