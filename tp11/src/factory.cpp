@@ -3,6 +3,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <functional>
+#include <map>
 
 // Liste des entitées à construire
 std::string desc = R"(Object
@@ -22,16 +24,38 @@ public:
 class Factory
 {
 public:
-    // using Builder = ...;
+    using Builder = std::function<std::unique_ptr<Entity>()>;
+
 
     template <typename TDerivedEntity>
-    void register_entity()
-    {}
+    void register_entity(const std::string& id)
+    {
+        _builder.emplace(id, []() {
+                return std::make_unique<TDerivedEntity>(); 
+            }
+        );
+    }
 
-    std::unique_ptr<Entity> build(const std::string& id) const { return nullptr; }
+    template <typename TDerivedEntity, typename... TArgs>
+    void register_entity(const std::string& id, TArgs&&... args)
+    {
+        _builder.emplace(id, [&args...]() {
+                return std::make_unique<TDerivedEntity>(std::forward<TArgs>(args)...); 
+            }
+        );
+    }
+
+    std::unique_ptr<Entity> build(const std::string& id) const {
+        auto it = _builder.find(id);
+
+        if(it != _builder.end())
+            return it->second();
+
+        return nullptr;
+    }
 
 private:
-    // ...
+    std::map<std::string, Builder> _builder;
 };
 
 class Object : public Entity
@@ -77,21 +101,31 @@ private:
 
 class House : public Object
 {
-public:
-    explicit House(Person& owner)
-        : _owner { owner }
-    {}
+    public:
+        explicit House(Person& owner)
+            : _owner {owner}
+        {}
 
-    void print() const override { std::cout << "House owned by " << _owner.get_name() << std::endl; }
+        void print() const override {
+            std::cout << "House owned by " << _owner.get_name() << std::endl;
+        }
 
-private:
-    Person& _owner;
+    private:
+        Person& _owner;
 };
 
 int main()
 {
     Factory factory;
-    // factory.register_entity<Object>("Object");
+    factory.register_entity<Object>("Object");
+    factory.register_entity<Person>("Person", "Jean");
+    factory.register_entity<Tree>("Tree");
+    factory.register_entity<Animal>("Dog", "dog");
+
+    Person owner("");
+    factory.register_entity<House>("House", owner);
+
+    owner.set_name("Picsou");
 
     std::vector<std::unique_ptr<Entity>> entities;
 

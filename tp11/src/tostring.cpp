@@ -3,13 +3,30 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <type_traits>
+#include <typeinfo>
 
 template <typename T>
-auto to_string(const T& data)
+auto to_string(const T& data) 
+    -> typename std::enable_if<!std::is_arithmetic<T>::value, std::string>::type
 {
     std::stringstream ss;
     ss << "<" << typeid(data).name() << ": " << &data << ">";
     return ss.str();
+}
+
+template <typename T>
+typename std::enable_if<std::is_arithmetic<T>::value, std::string>::type
+to_string(const T& value) {
+    return std::to_string(value);
+}
+
+std::string to_string(const std::string& str) {
+    return str;
+}
+
+std::string to_string(const char* c) {
+    return std::string(c);
 }
 
 class Empty
