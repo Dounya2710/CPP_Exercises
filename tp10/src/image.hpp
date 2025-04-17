@@ -1,8 +1,11 @@
-//#pragma once
+#pragma once
 
 #include <array>
 #include <cassert>
 #include <functional>
+
+template <typename P1, typename P2>
+using CombinedPixel = decltype(std::declval<P1>() + std::declval<P2>());
 
 template <typename P, size_t W, size_t H>
 class Image {
@@ -32,15 +35,20 @@ class Image {
             return _pixels[y][x];
         }
 
-        Image operator+(const Image& other) const {
-            auto result = new Image();
+        //Image operator+(const Image& other) const 
+        template<typename OtherP>
+        Image<CombinedPixel<P, OtherP>, W, H> operator+(const Image<OtherP, W, H>& other) const {
+            //auto result = new Image();
+            auto result = Image<CombinedPixel<P, OtherP>, W, H> {};
             for (auto y = 0; y < H; ++y) {
                 for (auto x = 0; x < W; ++x) {
-                    result._pixels[y][x] = _pixels[y][x] + other._pixels[y][x];
+                    //result._pixels[y][x] = _pixels[y][x] + other._pixels[y][x];
+                    result(x, y) = (*this)(x, y) + other(x, y);
                 }
             }
             return result;
         }
+
 
         const size_t width() const { return W; }
         

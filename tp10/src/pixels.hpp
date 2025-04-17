@@ -54,49 +54,52 @@ RGBA convert<RGBA, Luma>(const Luma& luma) {
     return convert<RGBA>(convert<RGB>(luma));
 }
 
-RGBA operator+(const RGBA& lhs, const RGBA& rhs) {
-    auto blended = image_lib::mix_color(lhs.r, lhs.g, lhs.b, lhs.a, rhs.r, rhs.g, rhs.b, rhs.a);
-    return { blended[0], blended[1], blended[2], blended[3] };
+RGBA operator+(const RGBA& lhs, const RGBA& rhs)
+{
+    const auto data = image_lib::mix_color(lhs.r, lhs.g, lhs.b, lhs.a, rhs.r, rhs.g, rhs.b, rhs.a);
+    return {data[0], data[1], data[2], data[3]};
 }
 
-RGB operator+(const RGB& lhs, const RGBA& rhs) {
-    return convert<RGB>(convert<RGBA>(lhs) + rhs);
+RGB operator+(const RGB& lhs, const RGBA& rhs)
+{
+    const auto new_lhs = convert<RGBA, RGB>(lhs);
+    return convert<RGB, RGBA>(new_lhs + rhs);
 }
 
-RGB operator+(const Luma& lhs, const RGBA& rhs) {
-    return convert<RGB>(convert<RGBA>(lhs) + rhs);
+RGB operator+(const Luma& lhs, const RGBA& rhs)
+{
+    const auto new_lhs = convert<RGBA, Luma>(lhs);
+    return convert<RGB, RGBA>(new_lhs + rhs);
 }
 
-RGBA operator+(const RGBA& lhs, const RGB& rhs) {
-    return lhs + convert<RGBA>(rhs);
+RGBA operator+(const RGBA& lhs, const RGB& rhs)
+{
+    const auto new_rhs = convert<RGBA, RGB>(rhs);
+    return lhs + new_rhs;
 }
 
-RGB operator+(const RGB& lhs, const RGB& rhs) {
-    return convert<RGB>(convert<RGBA>(lhs) + convert<RGBA>(rhs));
+RGB operator+(const RGB& lhs, const RGB& rhs)
+{
+    const auto new_lhs = convert<RGBA, RGB>(lhs);
+    const auto new_rhs = convert<RGBA, RGB>(rhs);
+    return convert<RGB, RGBA>(new_lhs + new_rhs);
 }
 
-RGB operator+(const Luma& lhs, const RGB& rhs) {
-    return convert<RGB>(convert<RGBA>(lhs) + convert<RGBA>(rhs));
+RGB operator+(const Luma& lhs, const RGB& rhs)
+{
+    const auto new_lhs = convert<RGBA, Luma>(lhs);
+    const auto new_rhs = convert<RGBA, RGB>(rhs);
+    return convert<RGB, RGBA>(new_lhs + new_rhs);
 }
 
-RGBA operator+(const RGBA& lhs, const Luma& rhs) {
-    return { lhs.r, lhs.g, lhs.b, rhs.l };
+RGBA operator+(const RGBA& lhs, const Luma& rhs)
+{
+    auto v = lhs;
+    v.a = v.a * rhs.l / 255;
+    return v;
 }
 
-RGBA operator+(const RGB& lhs, const Luma& rhs) {
-    return { lhs.r, lhs.g, lhs.b, rhs.l };
+RGBA operator+(const RGB& lhs, const Luma& rhs)
+{
+    return convert<RGBA, RGB>(lhs) + rhs;
 }
-
-RGBA operator+(const Luma& lhs, const Luma& rhs) {
-    return { lhs.l, lhs.l, lhs.l, rhs.l };
-}
-
-template <typename P>
-RGBA operator+(const P& lhs, const Luma& mask){
-    auto res = convert<RGBA, Luma>(lhs);
-    res.a = (res.a * mask.l) / 255;
-    return res;
-}
-
-template <typename P1, typename P2>
-using CombinedPixel = decltype(std::declval<P1>() + std::declval<P2>());
