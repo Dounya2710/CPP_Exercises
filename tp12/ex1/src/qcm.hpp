@@ -34,7 +34,7 @@ struct MyObject
 #define ANSWER_01 false
 
 // Je peux définir et insérer une instance de MyObject dans un std::set<MyObject>.  
-#define ANSWER_02 false
+#define ANSWER_02 true
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -96,11 +96,11 @@ struct MyObject
 
 // Question 32
 // La capture d'une lamda correspond aux attributs de l'objet associé.
-#define ANSWER_32 true
+#define ANSWER_32 false
 
 // Question 33
 // On écrit [value&] pour capturer `value` par référence. 
-#define ANSWER_33 false
+#define ANSWER_33 true
 
 // Question 34
 // On écrit [*value] pour capturer `value` par valeur.
@@ -118,7 +118,7 @@ struct MyObject
 
 // Question 41
 // Si Type est un paramètre de template, alors Type&& est une r-value reference de Type. 
-#define ANSWER_41 false
+#define ANSWER_41 true
 
 // Question 42
 // On peut spécialiser partiellement une fonction.
